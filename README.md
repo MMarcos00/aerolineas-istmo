@@ -101,6 +101,54 @@ Las reglas RN-01 a RN-08 se implementan en `api/src/domain/policies.ts`, fuera d
 
 Los contextos están **separados lógicamente** dentro de un Worker; **no** se desplegaron microservicios independientes. Las ACL para pagos y migración son propuestas de diseño, no conexiones reales.
 
+## 🗺️ Diagramas del análisis y la arquitectura
+
+Los siguientes diagramas forman parte de la documentación entregada. También están incorporados en el [PDF completo](docs/Documentacion_Aerolineas_del_Istmo.pdf) y sus versiones editables están disponibles en la carpeta [`diagrams/`](diagrams/).
+
+### 1. Mapa de contextos — DDD estratégico
+
+![1. Mapa de contextos — DDD estratégico](docs/assets/diagramas/mapa_contextos_ddd.png)
+
+*Identifica los contextos delimitados y sus relaciones de integración.*
+
+### 2. C4 — Nivel 1: Contexto del sistema
+
+![2. C4 — Nivel 1: Contexto del sistema](docs/assets/diagramas/c4_nivel_1_contexto.png)
+
+*Identifica actores, sistema principal y servicios externos previstos.*
+
+### 3. C4 — Nivel 2: Contenedores
+
+![3. C4 — Nivel 2: Contenedores](docs/assets/diagramas/c4_nivel_2_contenedores.png)
+
+*Presenta el frontend, la API y la base de datos D1.*
+
+### 4. C4 — Nivel 3: Componentes
+
+![4. C4 — Nivel 3: Componentes](docs/assets/diagramas/c4_nivel_3_componentes.png)
+
+*Explica las responsabilidades del Worker y la separación entre dominio e infraestructura.*
+
+### 5. C4 — Nivel 4: Clases y dependencias
+
+![5. C4 — Nivel 4: Clases y dependencias](docs/assets/diagramas/c4_nivel_4_clases.jpg)
+
+*Visualiza las clases de dominio, casos de uso, interfaces y adaptadores.*
+
+### 6. Modelo relacional de la base de datos
+
+![6. Modelo relacional de la base de datos](docs/assets/diagramas/modelo_relacional_d1.png)
+
+*Presenta las principales tablas y relaciones utilizadas en la persistencia SQL.*
+
+### 7. Flujo RN-07: Cambio de boleto con penalidad
+
+![7. Flujo RN-07: Cambio de boleto con penalidad](docs/assets/diagramas/flujo_cambio_boleto_rn07.png)
+
+*Representa la validación, cotización, confirmación simulada y persistencia del nuevo boleto.*
+
+> **Nota académica:** las pasarelas externas y el sistema de migración se presentan como extensiones futuras. La versión publicada utiliza pagos simulados y notificaciones internas.
+
 ## 🧩 Funciones implementadas
 
 | Código | Función | Estado en la demostración |
@@ -215,7 +263,7 @@ El documento **[Documentación completa en PDF](docs/Documentacion_Aerolineas_de
 - Fase DDD: vocabulario, subdominios, bounded contexts y Context Map.
 - DDD táctico: políticas e invariantes del negocio.
 - Arquitectura Hexagonal y fragmentos de código.
-- Modelo C4: cuatro niveles y esquema de base de datos.
+- Modelo C4: cuatro niveles, Context Map, modelo de datos y flujo RN-07 con imágenes completas (anexo gráfico).
 - SQL, migraciones, creación de API y desarrollo frontend.
 - Evidencias mediante capturas proporcionadas durante el desarrollo.
 - Pruebas y publicación paso a paso en Cloudflare y GitHub Pages.
