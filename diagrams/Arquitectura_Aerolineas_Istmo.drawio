@@ -1,0 +1,318 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net" modified="2026-11-12T20:10:00.000Z" agent="ChatGPT" version="24.7.17" type="device">
+  <diagram name="1 - Context Map DDD" id="1">
+    <mxGraphModel dx="1300" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="t" value="MAPA DE CONTEXTOS | DDD estratégico" style="text;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontFamily=Helvetica;fontSize=23;fontStyle=1;fontColor=#0c3358;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="24" width="1200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub" value="Flechas: proveedor → consumidor. ACL y kernel compartido son fronteras explícitas." style="text;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontFamily=Helvetica;fontSize=13;fontStyle=1;fontColor=#0c3358;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="62" width="1300" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="v" value="VUELOS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Horarios · Rutas · Puertas&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="110" y="145" width="260" height="86" as="geometry"/>
+        </mxCell>
+        <mxCell id="p" value="PASAJEROS Y CLIENTES&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Identidad · Crédito&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="110" y="330" width="260" height="86" as="geometry"/>
+        </mxCell>
+        <mxCell id="i" value="INVENTARIO DE ASIENTOS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Cupos · Sobreventa&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="110" y="530" width="260" height="86" as="geometry"/>
+        </mxCell>
+        <mxCell id="r" value="RESERVAS Y TARIFAS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;CORE: reglas comerciales&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e2f4fd;strokeColor=#0879b2;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="600" y="305" width="285" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="a" value="OPERACIONES AEROPUERTO&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Check-in · Abordaje&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="170" width="310" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="no" value="NOTIFICACIONES&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Buzón interno&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="470" width="260" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="pag" value="PASARELA DE PAGOS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Sistema externo (futuro)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff1da;strokeColor=#d79227;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="600" y="660" width="275" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="mig" value="MIGRACIÓN&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Sistema externo (futuro)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff1da;strokeColor=#d79227;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="1055" y="680" width="270" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="Cliente / Proveedor" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="v" target="r">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="Cliente / Proveedor" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="p" target="r">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="Cliente / Proveedor" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="i" target="r">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="Conformista" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="r" target="a">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="Evento de cambio" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="v" target="no">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="ACL (traductor)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#c18a2d;strokeWidth=2;fontColor=#19485e;fontSize=12;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="r" target="pag">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" value="ACL (traductor)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#c18a2d;strokeWidth=2;fontColor=#19485e;fontSize=12;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="a" target="mig">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" value="Kernel: VueloId / ReservaId" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#3388bb;strokeWidth=2;fontColor=#19485e;fontSize=12;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="r" target="i">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="2 - C4 Nivel 1 Contexto" id="2">
+    <mxGraphModel dx="1300" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="t" value="C4 · NIVEL 1 | Contexto del sistema" style="text;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontFamily=Helvetica;fontSize=23;fontStyle=1;fontColor=#0c3358;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="25" width="1200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="sales" value="AGENTE DE VENTAS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Mostrador / Call center&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eae6ff;strokeColor=#7468bc;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="105" y="180" width="240" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="airport" value="PERSONAL DE AEROPUERTO&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Check-in y abordaje&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eae6ff;strokeColor=#7468bc;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="105" y="510" width="240" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="system" value="SISTEMA DE GESTIÓN&lt;br/&gt;DE RESERVAS Y ABORDAJE&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Aerolíneas del Istmo&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e2f4fd;strokeColor=#0879b2;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="570" y="290" width="360" height="185" as="geometry"/>
+        </mxCell>
+        <mxCell id="gateway" value="PASARELA DE PAGO&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Futura · ACL&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff1da;strokeColor=#d79227;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="1155" y="175" width="270" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="migracion" value="SISTEMA MIGRATORIO&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Futuro · ACL&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff1da;strokeColor=#d79227;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="1155" y="505" width="270" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="Cotiza / reserva / emite" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="sales" target="system">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="Check-in / aborda" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="airport" target="system">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="Solicita pago (futuro)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="system" target="gateway">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="Verifica documento (futuro)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="system" target="migracion">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="foot" value="Alcance del prototipo: pagos simulados y notificaciones internas. No se integran sistemas externos." style="text;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontFamily=Helvetica;fontSize=14;fontStyle=1;fontColor=#0c3358;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="790" width="1350" height="40" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="3 - C4 Nivel 2 Contenedores" id="3">
+    <mxGraphModel dx="1300" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="t" value="C4 · NIVEL 2 | Contenedores desplegables" style="text;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontFamily=Helvetica;fontSize=23;fontStyle=1;fontColor=#0c3358;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="25" width="1200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="user" value="USUARIO EN NAVEGADOR&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Agente / Aeropuerto&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eae6ff;strokeColor=#7468bc;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="90" y="270" width="240" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="front" value="FRONTEND ESTÁTICO&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;HTML · CSS · JavaScript&lt;br/&gt;GitHub Pages&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="470" y="250" width="260" height="132" as="geometry"/>
+        </mxCell>
+        <mxCell id="api" value="API REST&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;TypeScript · Cloudflare Workers&lt;br/&gt;Hexagonal + DDD&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e2f4fd;strokeColor=#0879b2;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="870" y="250" width="280" height="132" as="geometry"/>
+        </mxCell>
+        <mxCell id="db" value="BASE DE DATOS SQL&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Cloudflare D1 · SQLite&lt;br/&gt;Pasajeros / vuelos / reservas&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="895" y="560" width="300" height="135" as="geometry"/>
+        </mxCell>
+        <mxCell id="future" value="INTEGRACIONES FUTURAS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Pagos / migración / WhatsApp&lt;br/&gt;Adaptadores ACL&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff1da;strokeColor=#d79227;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="430" y="590" width="290" height="115" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="Interfaz web" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="user" target="front">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="HTTPS + JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="front" target="api">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="Puerto repositorio / SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="api" target="db">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="ACL / Proveedores" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="api" target="future">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="foot" value="GitHub Pages no ejecuta backend: el Worker procesa solicitudes y D1 persiste los datos." style="text;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontFamily=Helvetica;fontSize=14;fontStyle=1;fontColor=#0c3358;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="65" y="790" width="1370" height="40" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="4 - C4 Nivel 3 Componentes" id="4">
+    <mxGraphModel dx="1300" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="t" value="C4 · NIVEL 3 | Componentes internos del Worker" style="text;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontFamily=Helvetica;fontSize=23;fontStyle=1;fontColor=#0c3358;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="25" width="1200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="front" value="NAVEGADOR&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Adaptador de entrada&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eae6ff;strokeColor=#7468bc;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="60" y="325" width="220" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="router" value="CONTROLADOR HTTP&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;api/src/index.ts&lt;br/&gt;Rutas REST y JSON&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="355" y="320" width="265" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="service" value="AerolineaService&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Casos de uso / coordinación&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e2f4fd;strokeColor=#0879b2;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="735" y="315" width="270" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="pol" value="PoliticaDeReservas&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Dominio RN-01…RN-08&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e2f4fd;strokeColor=#0879b2;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="130" width="295" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="port" value="PuertoRepositorioAerolinea&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Interfaz (puerto de salida)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="360" width="290" height="115" as="geometry"/>
+        </mxCell>
+        <mxCell id="adapt" value="D1Repositorio&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Adaptador SQL (infraestructura)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="1065" y="585" width="310" height="115" as="geometry"/>
+        </mxCell>
+        <mxCell id="db" value="BASE DE DATOS D1&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;SQLite&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="695" y="635" width="270" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="HTTP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="front" target="router">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="Ejecuta caso de uso" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="router" target="service">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="Aplica políticas" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="service" target="pol">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="Llama interfaz" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="service" target="port">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="Implementada por" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="port" target="adapt">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="Consultas SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="adapt" target="db">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="foot" value="El dominio (azul) no importa código de Cloudflare, HTTP ni SQL." style="text;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontFamily=Helvetica;fontSize=14;fontStyle=1;fontColor=#0c3358;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="800" width="1300" height="40" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="5 - C4 Nivel 4 Clases" id="5">
+    <mxGraphModel dx="1300" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="t" value="C4 · NIVEL 4 | Clases y dependencias" style="text;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontFamily=Helvetica;fontSize=23;fontStyle=1;fontColor=#0c3358;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="25" width="1200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="controller" value="HTTP (adaptador entrada)&lt;br/&gt;&lt;font style=&quot;font-size:13px&quot;&gt;GET/POST/DELETE&lt;br/&gt;request → AerolineaService&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="70" y="280" width="255" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="service" value="AerolineaService&lt;br/&gt;&lt;font style=&quot;font-size:13px&quot;&gt;crearReserva()&lt;br/&gt;cotizar() · confirmar()&lt;br/&gt;emitir() · checkin()&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e2f4fd;strokeColor=#0879b2;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="425" y="270" width="300" height="175" as="geometry"/>
+        </mxCell>
+        <mxCell id="rules" value="PoliticaDeReservas&lt;br/&gt;&lt;font style=&quot;font-size:13px&quot;&gt;validarCantidad()&lt;br/&gt;validarCapacidad()&lt;br/&gt;validarCancelacion()&lt;br/&gt;validarDocumento()&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e2f4fd;strokeColor=#0879b2;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="825" y="100" width="305" height="188" as="geometry"/>
+        </mxCell>
+        <mxCell id="models" value="Pasajero · Vuelo · Reserva&lt;br/&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Entidades DDD&lt;br/&gt;Boleto · Tramo · Cotizacion&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e2f4fd;strokeColor=#0879b2;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="1210" y="115" width="280" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="port" value="PuertoRepositorioAerolinea&lt;br/&gt;&lt;font style=&quot;font-size:13px&quot;&gt;interfaz&lt;br/&gt;pasajero() · vuelo()&lt;br/&gt;confirmar() · emitir()&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="815" y="420" width="320" height="178" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo" value="D1Repositorio&lt;br/&gt;&lt;font style=&quot;font-size:13px&quot;&gt;implements Puerto…&lt;br/&gt;SQL con parámetros&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="520" width="270" height="145" as="geometry"/>
+        </mxCell>
+        <mxCell id="d1" value="Base de datos D1&lt;br/&gt;&lt;font style=&quot;font-size:13px&quot;&gt;SQLite&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="870" y="720" width="250" height="94" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="Invoca" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="controller" target="service">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="Aplica" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="service" target="rules">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="Depende de interfaz" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="service" target="port">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="Consulta entidades" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="rules" target="models">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="Implementa" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;dashed=1;dashPattern=7 5;" edge="1" parent="1" source="repo" target="port">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="Persiste" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="repo" target="d1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="6 - Modelo de Datos" id="6">
+    <mxGraphModel dx="1300" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="t" value="MODELO RELACIONAL | Persistencia D1 (SQLite)" style="text;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;fontFamily=Helvetica;fontSize=23;fontStyle=1;fontColor=#0c3358;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="25" width="1200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="agent" value="AGENTES&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;PK id&lt;br/&gt;nombre&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="80" y="135" width="255" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="pass" value="PASAJEROS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;PK id · documento&lt;br/&gt;tipo_cliente · crédito&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="80" y="430" width="255" height="125" as="geometry"/>
+        </mxCell>
+        <mxCell id="booking" value="RESERVAS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;PK id&lt;br/&gt;FK agente_id, titular_id&lt;br/&gt;estado, total, fecha&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e2f4fd;strokeColor=#0879b2;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="510" y="245" width="290" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="bp" value="RESERVA_PASAJEROS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;PK (reserva_id,pasajero_id)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="520" y="540" width="275" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="flight" value="VUELOS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;PK id&lt;br/&gt;ruta, fecha, capacidad, tarifas&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#edf5f9;strokeColor=#528bb1;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="975" y="130" width="295" height="125" as="geometry"/>
+        </mxCell>
+        <mxCell id="leg" value="RESERVA_TRAMOS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;PK (reserva_id,vuelo_id)&lt;br/&gt;clase&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="975" y="350" width="295" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="ticket" value="BOLETOS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;PK id · FK reserva/pasajero/vuelo&lt;br/&gt;tarifa_cents (snapshot)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="965" y="550" width="305" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="check" value="CHECKINS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;PK id · FK reserva/pasajero/vuelo&lt;br/&gt;asiento · abordado&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="110" y="745" width="305" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="pay" value="PAGOS&lt;br/&gt;&lt;font style=&quot;font-size:12px&quot;&gt;PK id · FK reserva_id&lt;br/&gt;monto · fecha&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e9f8f3;strokeColor=#168e72;strokeWidth=2;fontFamily=Helvetica;fontSize=16;fontColor=#16354b;align=center;verticalAlign=middle;spacing=9;" vertex="1" parent="1">
+          <mxGeometry x="540" y="750" width="265" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="agent" target="booking">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="Titular 1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="pass" target="booking">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="booking" target="bp">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="pass" target="bp">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="booking" target="leg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="flight" target="leg">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="booking" target="ticket">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="booking" target="pay">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" value="1:N" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="booking" target="check">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e10" value="vuelo" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#56798e;strokeWidth=2;fontColor=#19485e;fontSize=12;" edge="1" parent="1" source="leg" target="ticket">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

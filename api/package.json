@@ -1,0 +1,20 @@
+{
+  "name": "aerolineas-istmo-api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "deploy": "wrangler deploy",
+    "db:local": "wrangler d1 migrations apply aerolineas-istmo-db --local",
+    "db:remota": "wrangler d1 migrations apply aerolineas-istmo-db --remote",
+    "types": "tsc --noEmit",
+    "test": "tsc --module commonjs --target ES2022 --outDir ../tests/.build src/domain/model.ts src/domain/policies.ts && node ../tests/domain.test.cjs",
+    "test:integration": "tsc --module commonjs --target ES2022 --lib ES2022,DOM --outDir ../tests/.build --rootDir src src/index.ts && node --experimental-sqlite --test ../tests/integration.test.cjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261110.1",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.0.0"
+  }
+}

@@ -1,0 +1,11 @@
+
+name = "aerolineas-istmo-api"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "aerolineas-istmo-db"
+database_id = "e16f8f72-5d28-48c8-a738-91e0579b9f81"
+migrations_dir = "migrations"
