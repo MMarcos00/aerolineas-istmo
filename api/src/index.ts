@@ -36,11 +36,17 @@ export default {
           else if(m==='POST'&&parts[2]==='confirmar') respuesta=json(await service.confirmar(id,Number((await body(request)).equipajes||0)));
           else if(m==='POST'&&parts[2]==='pagar') respuesta=json(await service.pagar(id));
           else if(m==='POST'&&parts[2]==='emitir') respuesta=json(await service.emitir(id));
+          else if(m==='GET'&&parts[2]==='cotizar-cambio') respuesta=json(await service.cotizarCambio(id,
+            url.searchParams.get('vueloAnteriorId')||'',url.searchParams.get('vueloNuevoId')||'',
+            url.searchParams.get('claseNueva') as any));
+          else if(m==='POST'&&parts[2]==='cambiar-boleto') { const d=await body(request);
+            respuesta=json(await service.cambiarBoleto(id,d.vueloAnteriorId,d.vueloNuevoId,d.claseNueva)); }
           else if(m==='POST'&&parts[2]==='cancelar') respuesta=json(await service.cancelar(id));
           else if(m==='POST'&&parts[2]==='checkin') {const d=await body(request);respuesta=json(await service.checkin(id,d.pasajeroId,d.vueloId,Number(d.equipajes||0)));}
           else if(m==='POST'&&parts[2]==='abordar') {const d=await body(request);respuesta=json(await service.abordar(id,d.pasajeroId,d.vueloId));}
           else respuesta=json({error:'Ruta no encontrada'},404);
-        } else if(m==='POST'&&parts[0]==='vuelos'&&id&&parts[2]==='cambiar') respuesta=json(await service.cambiarVuelo(id,await body(request)));
+        } else if(m==='GET'&&parts[0]==='vuelos'&&id&&parts[2]==='manifiesto') respuesta=json(await service.manifiesto(id));
+        else if(m==='POST'&&parts[0]==='vuelos'&&id&&parts[2]==='cambiar') respuesta=json(await service.cambiarVuelo(id,await body(request)));
         else respuesta=json({error:'Ruta no encontrada'},404);
       }
       const headers=new Headers(respuesta.headers);Object.entries(cors).forEach(([k,v])=>headers.set(k,v));

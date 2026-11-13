@@ -1,4 +1,4 @@
-import { Boleto, ClaseTarifa, Cotizacion, DetalleReserva, ErrorDominio, EstadoReserva, Pasajero, TipoCliente, Vuelo } from './model';
+import { Boleto, ClaseTarifa, Cotizacion, CotizacionCambio, DetalleReserva, ErrorDominio, EstadoReserva, Pasajero, TipoCliente, Vuelo } from './model';
 
 /** Las RN se prueban sin base de datos ni controlador: núcleo DDD de la aplicación. */
 export class PoliticaDeReservas {
@@ -70,7 +70,39 @@ export class PoliticaDeReservas {
     }
   }
 
-  static validarPenalidadCambio(estado: EstadoReserva): void { // RN-07
-    if (estado === 'BOLETO_EMITIDO') throw new ErrorDominio('Un boleto emitido no se modifica; requiere procedimiento de cambio y penalidad (fuera del alcance del demo).');
+  static penalidadCancelacion(estado: EstadoReserva,
+      tramos: {vuelo: Vuelo; clase: ClaseTarifa}[], pasajeros: number): number { // RN-07
+    if (estado !== 'BOLETO_EMITIDO') return 0;
+    if (!Number.isInteger(pasajeros) || pasajeros<1) throw new ErrorDominio('Pasajeros inválidos.');
+    return tramos.reduce((total, tramo) => {
+      const tarifa = tramo.clase==='ECONOMICA'
+        ? tramo.vuelo.penalidadCambioEconomicaCentavos : tramo.vuelo.penalidadCambioEjecutivaCentavos;
+      if (!Number.isInteger(tarifa) || tarifa<0) throw new ErrorDominio('Penalidad de tarifa inválida.');
+      return total + tarifa*pasajeros;
+    },0);
+  }
+
+  static calcularCambio(estado: EstadoReserva, vueloOriginal: Vuelo, claseOriginal: ClaseTarifa,
+    tarifasOriginales: number[], vueloNuevo: Vuelo, claseNueva: ClaseTarifa,
+    checkins: number): CotizacionCambio { // RN-07 y RN-08
+    if (estado !== 'BOLETO_EMITIDO') throw new ErrorDominio('Solo se cambian boletos emitidos que no han realizado check-in.');
+    if (checkins !== 0) throw new ErrorDominio('No se permiten cambios después del check-in.');
+    if (!tarifasOriginales.length || tarifasOriginales.some(t => !Number.isInteger(t) || t < 0))
+      throw new ErrorDominio('No se encontraron boletos activos para el tramo original.');
+    if (vueloNuevo.estado !== 'PROGRAMADO' || new Date(vueloNuevo.salida).getTime() <= Date.now())
+      throw new ErrorDominio('El vuelo nuevo debe estar programado para una fecha futura.');
+    if (vueloOriginal.origen !== vueloNuevo.origen || vueloOriginal.destino !== vueloNuevo.destino)
+      throw new ErrorDominio('El cambio debe conservar el origen y destino del tramo original.');
+    const penalidadPorPasajero = claseOriginal === 'ECONOMICA'
+      ? vueloOriginal.penalidadCambioEconomicaCentavos : vueloOriginal.penalidadCambioEjecutivaCentavos;
+    const tarifaNueva = claseNueva === 'ECONOMICA' ? vueloNuevo.precioEconomicaCentavos : vueloNuevo.precioEjecutivaCentavos;
+    if (![penalidadPorPasajero,tarifaNueva].every(x=>Number.isInteger(x)&&x>=0))
+      throw new ErrorDominio('La tarifa y penalidad deben ser importes válidos.');
+    // Tarifa histórica del boleto antiguo, no el precio vigente del catálogo (RN-08).
+    const diferencia = tarifasOriginales.reduce((total, t) => total + Math.max(0, tarifaNueva-t), 0);
+    const penalidad = penalidadPorPasajero * tarifasOriginales.length;
+    return {penalidadCentavos:penalidad,diferenciaTarifariaCentavos:diferencia,
+      recargoTotalCentavos:penalidad+diferencia,pasajeros:tarifasOriginales.length,
+      tarifaAnteriorCentavos:tarifasOriginales[0],tarifaNuevaCentavos:tarifaNueva};
   }
 }

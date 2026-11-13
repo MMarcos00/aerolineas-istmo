@@ -11,6 +11,7 @@ export class AerolineaService {
   reservas(pasajeroId?:string,agenteId?:string) { return this.repo.reservas({pasajeroId,agenteId}); }
   detalle(id:string) { return this.requerirReserva(id); }
   notificaciones(pasajeroId:string) { return this.repo.notificaciones(pasajeroId); }
+  async manifiesto(vueloId:string) { await this.requerirVuelo(vueloId); return this.repo.manifiesto(vueloId); }
 
   async registrarPasajero(i: {nombre:string;documento:string;documentoVence:string;nivelFrecuente:string;tipoCliente:TipoCliente;limiteCredito:number}) {
     if (!i.nombre?.trim() || !i.documento?.trim() || !/^\d{4}-\d{2}-\d{2}$/.test(i.documentoVence)) throw new ErrorDominio('Nombre, documento y fecha de vencimiento son obligatorios.');
@@ -96,11 +97,48 @@ export class AerolineaService {
     await this.repo.emitir(id,instantaneas);
     return this.requerirReserva(id);
   }
+  /** RN-07: cambio del tramo y reemisión con penalidad, sin modificar el boleto histórico. */
+  async cotizarCambio(id:string,vueloAnteriorId:string,vueloNuevoId:string,claseNueva:ClaseTarifa) {
+    const detalle=await this.requerirReserva(id);
+    const anterior=detalle.tramos.find(t=>t.vuelo.id===vueloAnteriorId);
+    if (!anterior) throw new ErrorDominio('El vuelo anterior no pertenece a la reserva.');
+    if (vueloAnteriorId===vueloNuevoId || detalle.tramos.some(t=>t.vuelo.id===vueloNuevoId))
+      throw new ErrorDominio('Seleccione un vuelo diferente que no esté en el itinerario.');
+    if (claseNueva!=='ECONOMICA' && claseNueva!=='EJECUTIVA') throw new ErrorDominio('Clase inválida.');
+    const nuevo=await this.requerirVuelo(vueloNuevoId);
+    const boletos=await this.repo.boletosActivos(id,vueloAnteriorId);
+    if (boletos.length!==detalle.pasajeros.length)
+      throw new ErrorDominio('Los boletos activos no coinciden con los pasajeros de la reserva.');
+    const precio=Regla.calcularCambio(detalle.reserva.estado,anterior.vuelo,anterior.clase,
+      boletos.map(b=>b.tarifaCentavos),nuevo,claseNueva,detalle.checkins);
+    Regla.validarCapacidad(nuevo,claseNueva,await this.repo.ocupados(nuevo.id,claseNueva),boletos.length);
+    const titular=await this.requerirPasajero(detalle.reserva.clienteTitularId);
+    Regla.validarCredito(titular,precio.recargoTotalCentavos);
+    return { ...precio,vueloAnterior:anterior.vuelo.codigo,vueloNuevo:nuevo.codigo,
+      claseAnterior:anterior.clase,claseNueva };
+  }
+  async cambiarBoleto(id:string,vueloAnteriorId:string,vueloNuevoId:string,claseNueva:ClaseTarifa) {
+    // Se recalcula al confirmar el cambio para evitar usar una cotización de otra reserva.
+    const precio=await this.cotizarCambio(id,vueloAnteriorId,vueloNuevoId,claseNueva);
+    const detalle=await this.requerirReserva(id);
+    const titular=await this.requerirPasajero(detalle.reserva.clienteTitularId);
+    const vueloNuevo=await this.requerirVuelo(vueloNuevoId);
+    const boletosAnteriores=await this.repo.boletosActivos(id,vueloAnteriorId);
+    const fecha=new Date().toISOString();
+    const tarifa=claseNueva==='ECONOMICA'?vueloNuevo.precioEconomicaCentavos:vueloNuevo.precioEjecutivaCentavos;
+    const boletos=boletosAnteriores.map(b=>({id:crypto.randomUUID(),reservaId:id,
+      pasajeroId:b.pasajeroId,vueloId:vueloNuevoId,tarifaCentavos:tarifa,clase:claseNueva,emitidoEn:fecha}));
+    await this.repo.guardarCambio(detalle.reserva,titular,vueloAnteriorId,precio.claseAnterior,
+      vueloNuevoId,claseNueva,precio,boletos);
+    return {mensaje: 'Cambio registrado; recargo SIMULADO, no se cobró dinero real.',precio,
+      detalle:await this.requerirReserva(id)};
+  }
   async cancelar(id:string) {
     const d=await this.requerirReserva(id);
     Regla.validarCancelacion(d.reserva.estado,d.tramos.map(t=>t.vuelo.salida));
-    await this.repo.cancelar(d);
-    return this.requerirReserva(id);
+    const penalidad = Regla.penalidadCancelacion(d.reserva.estado,d.tramos,d.pasajeros.length);
+    await this.repo.cancelar(d,penalidad);
+    return { ...(await this.requerirReserva(id)), penalidadSimuladaCentavos: penalidad };
   }
   async checkin(id:string,pasajeroId:string,vueloId:string,equipajes:number) {
     const d=await this.requerirReserva(id);

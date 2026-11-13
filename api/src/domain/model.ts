@@ -31,6 +31,8 @@ export interface Vuelo {
   precioEconomicaCentavos: number;
   precioEjecutivaCentavos: number;
   equipajeCentavos: number;
+  penalidadCambioEconomicaCentavos: number;
+  penalidadCambioEjecutivaCentavos: number;
 }
 export interface TramoReserva { vueloId: string; clase: ClaseTarifa; }
 export interface Reserva {
@@ -48,4 +50,14 @@ export interface Boleto { id: string; reservaId: string; pasajeroId: string; vue
 export interface Cotizacion { subtotalCentavos: number; descuentoCentavos: number; equipajeCentavos: number; totalCentavos: number; porcentajeDescuento: number; }
 export class ErrorDominio extends Error {
   constructor(mensaje: string) { super(mensaje); this.name = 'ErrorDominio'; }
+}
+
+/** Vista previa de un cambio con boleto emitido. Valores en centavos de quetzal. */
+export interface CotizacionCambio {
+  penalidadCentavos: number;
+  diferenciaTarifariaCentavos: number;
+  recargoTotalCentavos: number;
+  pasajeros: number;
+  tarifaAnteriorCentavos: number;
+  tarifaNuevaCentavos: number;
 }

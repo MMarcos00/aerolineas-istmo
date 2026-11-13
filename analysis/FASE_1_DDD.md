@@ -40,6 +40,10 @@ Los términos fueron definidos para que Ventas, Operaciones y Desarrollo utilice
 | 26 | Crédito disponible | Límite de crédito menos el crédito utilizado por reservas vigentes. |
 | 27 | Notificación | Aviso registrado por un cambio de horario, puerta o cancelación. |
 | 28 | Estado de reserva | Etapa de la reserva: Borrador, Confirmada, Boleto emitido, Check-in realizado, Abordado o Cancelada. |
+| 29 | Penalidad de tarifa | Cargo definido para un cambio o cancelación de boleto emitido, dependiente de la clase. |
+| 30 | Cambio de boleto | Sustitución autorizada de un tramo, con cálculo de penalidad, diferencia tarifaria y nueva emisión. |
+| 31 | Reemisión | Generación del boleto para el nuevo tramo, conservando el boleto antiguo anulado como historial. |
+| 32 | Reembolso simulado | Importe teórico luego de deducir una penalidad; esta aplicación no transfiere dinero real. |
 
 ## Paso 2. Identificación y clasificación de subdominios
 
@@ -108,7 +112,7 @@ En la **demostración** los contextos se organizan como módulos lógicos en un 
 | RN-04 | `porcentajeDescuento` y `cotizar` |
 | RN-05 | `validarCancelacion` |
 | RN-06 | `validarDocumentoInternacional` |
-| RN-07 | `validarEdicion` y manejo de estados |
+| RN-07 | `validarEdicion`, `calcularCambio` y `penalidadCancelacion`: cambio y cancelación con recargo simulado, con registros en SQL |
 | RN-08 | Instantánea de tarifa calculada por `PoliticaDeReservas.prepararBoletos` en el dominio y persistida sin recalcular por D1 |
 
 ## Modelo C4 del proyecto
@@ -123,3 +127,12 @@ Los diagramas editables de Context Map, C4 y base de datos están en `diagrams/A
 ## Alcance honesto de esta versión académica
 
 Se cubren RF-01 a RF-08 **para demostración**, aunque RF-08 usa notificaciones dentro de la app. No hay pasarela bancaria real, WhatsApp, sistema migratorio, autenticación, selección avanzada de asientos, cambio de boleto con penalidad configurable ni garantía de concurrencia para venta simultánea de alta demanda. El software no debe usarse con pasajeros reales ni datos personales sensibles.
+
+## Ampliación académica: cambios y manifiesto
+
+- Una reserva **BOLETO_EMITIDO** no puede editar pasajeros ni tramos directamente. El caso de uso `cambiarBoleto` realiza una reemisión controlada, valida capacidad y crédito y registra una penalidad por clase más el aumento tarifario (si existe); los pagos se simulan.
+- Al cancelar una reserva con boleto emitido se registra la penalidad correspondiente y el reembolso teórico.
+- La tarifa original queda registrada en el boleto histórico, marcado `anulado=1`, y el nuevo boleto recibe su propia instantánea de tarifa. Esto hace comprobable RN-08.
+- En Aeropuerto, el **manifiesto** ofrece una proyección operacional distinta al modelo de Reservas: muestra pasajeros reservados, asientos, equipajes y estado de abordaje.
+- Las políticas se mantienen en `src/domain/policies.ts`, no en SQL ni en las rutas HTTP.
+- El flujo adicional se documenta en `diagrams/Flujo_Cambio_Boleto_RN07.drawio`.

@@ -11,7 +11,7 @@ const f = (name,label,inner,cls='') => `<div class="field ${cls}"><label for="${
 class AppController {
   constructor(){
     this.api=new ApiClient(window.API_URL);
-    this.page='inicio';this.selected='';this.quote=null;this.flightFilter={};this.historyFilter={};this.historyRows=null;this.noticePassenger='';
+    this.page='inicio';this.selected='';this.quote=null;this.changeQuote=null;this.flightFilter={};this.historyFilter={};this.historyRows=null;this.noticePassenger='';
     this.data={pasajeros:[],vuelos:[],agentes:[],reservas:[]};
     this.root=document.getElementById('main');
     document.body.addEventListener('click',e=>this.handleClick(e));
@@ -105,6 +105,16 @@ class AppController {
     ${this.quote?`<div class="notice">Subtotal: <b>${money(this.quote.subtotalCentavos)}</b> · Descuento: <b>${money(this.quote.descuentoCentavos)} (${this.quote.porcentajeDescuento*100}%)</b> · Equipaje: <b>${money(this.quote.equipajeCentavos)}</b><br>Total: <strong>${money(this.quote.totalCentavos)}</strong></div>`:''}
     ${confirmed?`<div class="actions"><button class="btn secondary" data-action="pay">Registrar pago SIMULADO (individual)</button><button class="btn success" data-action="issue">Emitir boletos</button><button class="btn danger" data-action="cancel">Cancelar reserva</button></div>`:''}
     ${r.estado==='BOLETO_EMITIDO'?`<div class="notice">Boletos emitidos: <b>${d.boletos}</b>. Ya no se permite editar esta reserva. Se puede gestionar check-in o cancelar si faltan al menos 3 horas.</div><div class="actions"><button class="btn" data-page="aeropuerto">Ir a check-in</button><button class="btn danger" data-action="cancel">Cancelar reserva</button></div>`:''}
+    ${r.estado==='BOLETO_EMITIDO'&&d.tramos.length?`<div class="subpanel top-gap"><h3>RN-07 · Cambio de boleto con penalidad</h3>
+      <p class="hint">Solo cambia el vuelo antes del check-in. La penalidad depende de la tarifa original; el recargo y su pago son simulados.</p>
+      <div class="fields two">
+        ${f('change-old-leg','Vuelo original',`<select id="change-old-leg">${selectOptions(d.tramos,t=>t.vuelo.id,t=>t.vuelo.codigo+' · '+t.vuelo.destino)}</select>`)}
+        ${f('change-new-leg','Nuevo vuelo (misma ruta)',`<select id="change-new-leg">${selectOptions(this.data.vuelos.filter(v=>!d.tramos.some(t=>t.vuelo.id===v.id)&&d.tramos.some(t=>t.vuelo.origen===v.origen&&t.vuelo.destino===v.destino)&&v.estado==='PROGRAMADO'),v=>v.id,v=>v.codigo+' · '+fecha(v.salida))}</select>`)}
+        ${f('change-new-class','Nueva clase',`<select id="change-new-class"><option value="ECONOMICA">Económica</option><option value="EJECUTIVA">Ejecutiva</option></select>`)}
+      </div>
+      <div class="actions"><button class="btn secondary" data-action="quoteChange">Cotizar penalidad</button><button class="btn success" data-action="makeChange">Confirmar cambio SIMULADO</button></div>
+      <div id="change-quote-result" class="notice top-gap">${this.changeQuote?'Cotización anterior (selecciona nuevamente antes de confirmar)':'Selecciona vuelos y cotiza antes de cambiar.'}</div>
+      </div>`:''}
     ${r.estado==='CHECKIN_REALIZADO'||r.estado==='ABORDADO'?`<div class="notice">Check-ins: ${d.checkins} · Abordajes: ${d.abordajes} · Boletos: ${d.boletos}</div><button class="btn" data-page="aeropuerto">Ir a aeropuerto</button>`:''}
     ${draft?'<div class="actions"><button class="btn danger" data-action="cancel">Cancelar borrador</button></div>':''}
     </section>`;
@@ -113,7 +123,11 @@ class AppController {
     const d=this.current&&this.current.reserva.id===this.selected?this.current:null;
     return `<section class="panel"><h2>Check-in y abordaje</h2><p class="hint">RF-05, RF-06 y RN-06 · Para operar, abre primero una reserva con boleto emitido desde «Reservas».</p>${!d?'<div class="notice">No se ha seleccionado una reserva. Visita la sección Reservas y presiona Gestionar.</div>':`<div class="notice">Reserva <b>${esc(d.reserva.id.slice(0,8))}</b> · ${tag(d.reserva.estado)} · Check-ins: ${d.checkins} · Abordados: ${d.abordajes}</div>
     <div class="fields two">${f('airport-member','Pasajero',`<select id="airport-member">${selectOptions(d.pasajeros,p=>p.id,p=>p.nombre)}</select>`)}${f('airport-leg','Vuelo',`<select id="airport-leg">${selectOptions(d.tramos,t=>t.vuelo.id,t=>t.vuelo.codigo+' · '+t.vuelo.destino)}</select>`)}${f('airport-bags','Equipajes recibidos','<input id="airport-bags" type="number" min="0" step="1" value="0">')}</div>
-    <div class="actions"><button class="btn success" data-action="checkin">Realizar check-in + asignar asiento</button><button class="btn" data-action="board">Marcar abordaje</button></div><p class="hint top-gap">El asiento se asigna automáticamente. En vuelos internacionales se validan 6 meses de vigencia del documento.</p>`}</section>`;
+    <div class="actions"><button class="btn success" data-action="checkin">Realizar check-in + asignar asiento</button><button class="btn" data-action="board">Marcar abordaje</button></div><p class="hint top-gap">El asiento se asigna automáticamente. En vuelos internacionales se validan 6 meses de vigencia del documento.</p>`}</section>
+    <section class="panel top-gap"><h2>Manifiesto de pasajeros</h2><p class="hint">Listado de pasajeros reservados, asiento asignado, equipaje recibido y estado de abordaje.</p>
+    <div class="fields two">${f('manifest-flight','Seleccionar vuelo',`<select id="manifest-flight">${selectOptions(this.data.vuelos,v=>v.id,v=>v.codigo+' · '+v.destino)}</select>`)}</div>
+    <div class="actions"><button class="btn secondary" data-action="loadManifest">Consultar manifiesto</button></div>
+    <div id="manifest-output" class="top-gap">${empty('Selecciona un vuelo y consulta el manifiesto.')}</div></section>`;
   }
   render_notificaciones(){
     const options=selectOptions(this.data.pasajeros,p=>p.id,p=>p.nombre+' · '+p.documento);
@@ -128,7 +142,7 @@ class AppController {
       if(a==='retry'){await this.load();return false;}
       if(a==='clearFlightFilter'){this.flightFilter={};this.render();return false;}
       if(a==='clearHistory'){this.historyFilter={};this.historyRows=null;this.render();return false;}
-      if(a==='openBooking'){this.selected=id;this.current=await this.api.get(`/reservas/${id}`);this.page='reservas';this.quote=null;this.render();setTimeout(()=>document.getElementById('detalle-reserva')?.scrollIntoView({behavior:'smooth'}),50);return false;}
+      if(a==='openBooking'){this.selected=id;this.current=await this.api.get(`/reservas/${id}`);this.page='reservas';this.quote=null;this.changeQuote=null;this.render();setTimeout(()=>document.getElementById('detalle-reserva')?.scrollIntoView({behavior:'smooth'}),50);return false;}
       if(a==='addPassenger'){const p=document.getElementById('member-select').value;if(!p)throw new Error('Seleccione un pasajero.');await this.api.post(`/reservas/${this.selected}/pasajeros`,{pasajeroId:p});await this.updateBooking();return;}
       if(a==='removePassenger'){await this.api.delete(`/reservas/${this.selected}/pasajeros/${id}`);await this.updateBooking();return;}
       if(a==='addLeg'){const vueloId=document.getElementById('leg-select').value,clase=document.getElementById('leg-class').value;if(!vueloId)throw new Error('Seleccione un vuelo.');await this.api.post(`/reservas/${this.selected}/tramos`,{vueloId,clase});await this.updateBooking();return;}
@@ -138,14 +152,41 @@ class AppController {
         if(a==='quote'){this.quote=await this.api.get(`/reservas/${this.selected}/cotizacion?equipajes=${bags}`);this.render();}
         else{await this.api.post(`/reservas/${this.selected}/confirmar`,{equipajes:bags});this.quote=null;await this.updateBooking();}return;
       }
+      if(a==='quoteChange'||a==='makeChange'){
+        const vueloAnteriorId=document.getElementById('change-old-leg')?.value;
+        const vueloNuevoId=document.getElementById('change-new-leg')?.value;
+        const claseNueva=document.getElementById('change-new-class')?.value;
+        if(!vueloAnteriorId||!vueloNuevoId)throw new Error('Seleccione un vuelo original y uno nuevo de la misma ruta.');
+        const params=new URLSearchParams({vueloAnteriorId,vueloNuevoId,claseNueva});
+        if(a==='quoteChange'){
+          this.changeQuote=await this.api.get(`/reservas/${this.selected}/cotizar-cambio?${params}`);
+          // Mostramos el resultado sin recrear los selectores y perder la selección.
+          const notice=document.getElementById('change-quote-result');
+          const msg=`Penalidad: ${money(this.changeQuote.penalidadCentavos)} · Diferencia: ${money(this.changeQuote.diferenciaTarifariaCentavos)} · Total SIMULADO: ${money(this.changeQuote.recargoTotalCentavos)}`;
+          if(notice) notice.textContent=msg; else this.toast(msg);
+          return false;
+        }
+        const actual=await this.api.get(`/reservas/${this.selected}/cotizar-cambio?${params}`);
+        if(!confirm(`Cambio ${actual.vueloAnterior} → ${actual.vueloNuevo}\nPenalidad: ${money(actual.penalidadCentavos)}\nDiferencia: ${money(actual.diferenciaTarifariaCentavos)}\nRecargo simulado: ${money(actual.recargoTotalCentavos)}\n\n¿Confirmar? No se procesará dinero real.`))return false;
+        const result=await this.api.post(`/reservas/${this.selected}/cambiar-boleto`,{vueloAnteriorId,vueloNuevoId,claseNueva});
+        this.changeQuote=null;await this.updateBooking();return result.mensaje;
+      }
       if(a==='pay'){const d=await this.api.post(`/reservas/${this.selected}/pagar`);await this.updateBooking();return d.mensaje;}
       if(a==='issue'){await this.api.post(`/reservas/${this.selected}/emitir`);await this.updateBooking();return;}
-      if(a==='cancel'){if(!confirm('¿Confirmas cancelar la reserva?'))return false;await this.api.post(`/reservas/${this.selected}/cancelar`);await this.updateBooking();return;}
+      if(a==='cancel'){if(!confirm('¿Confirmas cancelar la reserva? Si tiene boleto emitido, se aplicará la penalidad de la tarifa (simulada).'))return false;const res=await this.api.post(`/reservas/${this.selected}/cancelar`);await this.updateBooking();return `Reserva cancelada. Penalidad simulada: ${money(res.penalidadSimuladaCentavos||0)}`;}
       if(a==='checkin'||a==='board'){
         const pasajeroId=document.getElementById('airport-member')?.value,vueloId=document.getElementById('airport-leg')?.value;
         if(!pasajeroId||!vueloId)throw new Error('Seleccione un pasajero y vuelo.');
         const info=await this.api.post(`/reservas/${this.selected}/${a==='checkin'?'checkin':'abordar'}`,{pasajeroId,vueloId,equipajes:Number(document.getElementById('airport-bags').value)});
         this.current=await this.api.get(`/reservas/${this.selected}`);this.render();if(a==='checkin')return `Check-in completo. Asiento asignado: ${info.asiento}`;return;
+      }
+      if(a==='loadManifest'){
+        const id=document.getElementById('manifest-flight')?.value;
+        if(!id)throw new Error('Seleccione un vuelo.');
+        const lista=await this.api.get(`/vuelos/${id}/manifiesto`);
+        const filas=lista.map(x=>`<tr><td>${esc(x.pasajero)}</td><td>${esc(x.clase)}</td><td>${esc(x.asiento||'—')}</td><td>${x.equipajes}</td><td>${tag(x.estado)}</td></tr>`).join('');
+        document.getElementById('manifest-output').innerHTML=lista.length?`<div class="table-wrap"><table><thead><tr><th>Pasajero</th><th>Clase</th><th>Asiento</th><th>Equipajes</th><th>Estado</th></tr></thead><tbody>${filas}</tbody></table></div>`:empty('No hay pasajeros reservados para este vuelo.');
+        return false;
       }
       if(a==='loadNotifications'){
         const p=document.getElementById('notices-person').value;if(!p)throw new Error('Seleccione un pasajero.');
@@ -166,7 +207,7 @@ class AppController {
       if(form.id==='form-history'){this.historyFilter=values;const params=new URLSearchParams(Object.entries(values).filter(([,v])=>v));this.historyRows=await this.api.get('/reservas'+(params.size?'?'+params:''));this.render();return false;}
       if(form.id==='form-booking-create'){
         const d=await this.api.post('/reservas',values);
-        this.selected=d.reserva.id;this.current=d;this.quote=null;await this.refresh();
+        this.selected=d.reserva.id;this.current=d;this.quote=null;this.changeQuote=null;await this.refresh();
         document.getElementById('detalle-reserva')?.scrollIntoView({behavior:'smooth'});return;
       }
       if(form.id==='form-change-flight'){

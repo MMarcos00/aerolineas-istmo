@@ -47,3 +47,19 @@ test('RN-07: no se puede editar un boleto emitido',()=>{
   assert.doesNotThrow(()=>Reglas.validarEdicion('BORRADOR'));
   assert.throws(()=>Reglas.validarEdicion('BOLETO_EMITIDO'),ErrorDominio);
 });
+
+test('RN-07: calcula penalidad por clase + diferencia sin alterar tarifa original',()=>{
+  const original={...vuelo,origen:'Ciudad de Guatemala',destino:'Ciudad de México',penalidadCambioEconomicaCentavos:30000,penalidadCambioEjecutivaCentavos:50000};
+  const nuevo={...original,precioEconomicaCentavos:195000,salida:'2027-08-02T15:00:00Z'};
+  const precio=Reglas.calcularCambio('BOLETO_EMITIDO',original,'ECONOMICA',[180000,180000],nuevo,'ECONOMICA',0);
+  assert.equal(precio.penalidadCentavos,60000);
+  assert.equal(precio.diferenciaTarifariaCentavos,30000);
+  assert.equal(precio.recargoTotalCentavos,90000);
+  assert.throws(()=>Reglas.calcularCambio('CHECKIN_REALIZADO',original,'ECONOMICA',[180000],nuevo,'ECONOMICA',1),ErrorDominio);
+});
+
+test('RN-07: cancelación de boleto cobra penalidad por pasajero y tramo',()=>{
+  const v={...vuelo,penalidadCambioEconomicaCentavos:30000,penalidadCambioEjecutivaCentavos:50000};
+  assert.equal(Reglas.penalidadCancelacion('BOLETO_EMITIDO',[{vuelo:v,clase:'ECONOMICA'}],2),60000);
+  assert.equal(Reglas.penalidadCancelacion('CONFIRMADA',[{vuelo:v,clase:'ECONOMICA'}],2),0);
+});

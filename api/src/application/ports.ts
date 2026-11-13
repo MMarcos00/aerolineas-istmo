@@ -17,9 +17,14 @@ export interface PuertoRepositorioAerolinea {
   quitarTramo(reservaId: string, vueloId: string): Promise<void>;
   ocupados(vueloId: string, clase: ClaseTarifa): Promise<number>;
   confirmar(reserva: Reserva, total: number, equipajes: number, titular: Pasajero): Promise<void>;
+  boletosActivos(reservaId: string, vueloId: string): Promise<{pasajeroId:string; tarifaCentavos:number}[]>;
+  guardarCambio(reserva: Reserva, titular: Pasajero, vueloOriginalId: string,
+    claseOriginal: ClaseTarifa, vueloNuevoId: string, claseNueva: ClaseTarifa,
+    recargo: {penalidadCentavos:number;diferenciaTarifariaCentavos:number;recargoTotalCentavos:number},
+    boletos: Boleto[]): Promise<void>;
   registrarPago(reservaId: string, monto: number): Promise<void>;
   emitir(reservaId: string, boletos: Boleto[]): Promise<void>;
-  cancelar(reserva: DetalleReserva): Promise<void>;
+  cancelar(reserva: DetalleReserva, penalidadCentavos: number): Promise<void>;
   registrarCheckin(reservaId: string, pasajeroId: string, vueloId: string, equipajes: number, asiento: string): Promise<void>;
   asientosOcupados(vueloId: string): Promise<string[]>;
   consultarCheckin(reservaId: string, pasajeroId: string, vueloId: string): Promise<{ abordado: boolean } | null>;
@@ -28,4 +33,5 @@ export interface PuertoRepositorioAerolinea {
   actualizarEstadoReserva(reservaId: string, estado: string): Promise<void>;
   cambiarVuelo(vuelo: Vuelo, cambios: { salida?: string; puerta?: string; estado?: string }, mensaje: string): Promise<number>;
   notificaciones(pasajeroId: string): Promise<{ id: string; texto: string; creadaEn: string }[]>;
+  manifiesto(vueloId: string): Promise<{reservaId:string;pasajero:string;documento:string;clase:string;asiento:string|null;equipajes:number;estado:string}[]>;
 }

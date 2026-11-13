@@ -250,7 +250,7 @@ GitHub Pages actualiza la interfaz al publicar el nuevo commit. Si cambias el ba
 
 ## 16. Qué no debes prometer en la exposición
 
-Este es un **prototipo educativo**, no un sistema certificado para aerolíneas ni una tienda real de boletos. No ofrece pagos reales, autenticación segura, integración migratoria, mensajes reales por WhatsApp/SMS/correo ni control de concurrencia multiagente bajo alta demanda. Para producción harían falta seguridad, transacciones de inventario, conciliación de pagos, auditoría, protección de datos, pruebas de carga y reemisión con penalidades configuradas.
+Este es un **prototipo educativo**, no un sistema certificado para aerolíneas ni una tienda real de boletos. No ofrece pagos reales, autenticación segura, integración migratoria, mensajes reales por WhatsApp/SMS/correo ni control de concurrencia multiagente bajo alta demanda. La versión v2 simula cambios, reemisiones y penalidades, pero para producción harían falta seguridad, bloqueo de inventario atómico, conciliación de pagos, auditoría, protección de datos y pruebas de carga.
 
 ## Fuentes oficiales para instalación
 
@@ -258,3 +258,7 @@ Este es un **prototipo educativo**, no un sistema certificado para aerolíneas n
 - Cloudflare D1 migrations: https://developers.cloudflare.com/d1/reference/migrations/
 - GitHub Pages: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
 - WebStorm gratis no comercial: https://www.jetbrains.com/help/webstorm/register.html
+
+## 17. Actualizar a la versión v2, con penalidades y manifiesto
+
+Consulta `INSTRUCCIONES_ACTUALIZACION.md`. Esta actualización incorpora la migración 0002. Primero aplícala a D1 remota, después publica Workers y finalmente GitHub Pages. **No borres la base de datos remota y no reinicies el repositorio.**
